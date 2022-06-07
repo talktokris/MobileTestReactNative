@@ -1,20 +1,31 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
+// import WelcomeScreen from "./app/screens/WelcomeScreen"; // Welcome scrren
+
+import AppText from "./app/components/AppText"; // Standered StyleSheet
+import AppButton from "./app/components/AppButton"; // Standered StyleSheet
+
+// import { Ionicons } from "@expo/vector-icons"; // Icon Import
+
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <AppButton title="Login" onPress={() => console.log("tapped")} />
     </View>
   );
+
+  //  <AppText>Hi Lord Shiva</AppText>
+  // <WelcomeScreen />;
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: "center",
+    alignItems: "center",
+    // backgroundColor: '#fff',
   },
 });
+
+
