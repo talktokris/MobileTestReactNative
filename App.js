@@ -5,14 +5,26 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import AppText from "./app/components/AppText"; // Standered StyleSheet
 import AppButton from "./app/components/AppButton"; // Standered StyleSheet
+import colors from "./app/config/colors";
+import Card from "./app/components/Card";
+import ListingDetailScreen from "./app/screens/ListingDetailScreen";
+import ViewImageScreen from "./app/screens/ViewImageScreen";
+import MessagesScreen from "./app/screens/MessagesScreen";
 
 // import { Ionicons } from "@expo/vector-icons"; // Icon Import
 
 export default function App() {
-  return <WelcomeScreen />;
+  return <MessagesScreen />;
 
+  //<ViewImageScreen />;
+  /* 
+  <View style={{  backgroundColor: colors.grayOne,  margin: 10, marginTop: 40, }} >
+    <Card title="Red jacket for sale !"  subTitle="$100"  image={require("./app/assets/images/img1.jpg")} />
+   </View>
+  */
   //  <AppText>Hi Lord Shiva</AppText>
-  // <WelcomeScreen />;
+  //  <WelcomeScreen />;
+  //<ListingDetailScreen />;
 }
 
 const styles = StyleSheet.create({

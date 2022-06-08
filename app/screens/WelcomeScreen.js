@@ -15,6 +15,8 @@ import {
 import AppText from "../components/AppText"; // Standered StyleSheet
 import AppButton from "../components/AppButton"; // Standered StyleSheet
 import colors from "../config/colors";
+import fonts from "../config/fonts";
+import Constants from "expo-constants";
 function WelcomeScreen(props) {
   return (
     <ImageBackground
@@ -67,7 +69,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "800",
     paddingVertical: 20,
-    fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
+    fontFamily: Platform.OS === "android" ? fonts.android : fonts.ios,
+    alignItems: "",
   },
 });
 
