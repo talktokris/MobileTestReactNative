@@ -12,7 +12,9 @@ import {
 } from "react-native";
 
 //import React, {useState, Component, ImageBackground} from 'react';
-
+import AppText from "../components/AppText"; // Standered StyleSheet
+import AppButton from "../components/AppButton"; // Standered StyleSheet
+import colors from "../config/colors";
 function WelcomeScreen(props) {
   return (
     <ImageBackground
@@ -23,13 +25,19 @@ function WelcomeScreen(props) {
       <View style={styles.logoContainer}>
         <Image
           source={require("../assets/images/logo.png")}
-          style={styles.logoWelcome}
+          style={styles.logo}
         />
 
-        <Text style={styles.logoText}>Your Seach End Here</Text>
+        <Text style={styles.tagLine}>Your Seach End Here</Text>
       </View>
-      <View style={styles.loginButton}></View>
-      <View style={styles.loginRegister}></View>
+      <View style={styles.buttonContainer}>
+        <AppButton title="Login" onPress={() => console.log("tapped")} />
+        <AppButton
+          title="Register"
+          color="secondary"
+          onPress={() => console.log("tapped")}
+        />
+      </View>
     </ImageBackground>
   );
 }
@@ -38,43 +46,28 @@ const styles = StyleSheet.create({
   background: {
     flex: 1,
     justifyContent: "flex-end",
+    alignItems: "center",
   },
   logoContainer: {
-    justifyContent: "center",
     position: "absolute",
-    width: "100%",
-    height: 200,
-    top: 100,
-  },
-  loginButton: {
-    backgroundColor: "#fc5c65",
-    width: "100%",
-    height: 70,
-  },
-
-  loginRegister: {
-    backgroundColor: "#4ecdc4",
-    width: "100%",
-    height: 70,
-  },
-  logoWelcome: {
-    justifyContent: "center",
-    width: "100%",
-    resizeMode: "center",
-    flex: 1,
-  },
-  logoText: {
-    fontSize: 18,
-    width: "100%",
-    height: 50,
-    textAlign: "center",
-    fontWeight: "bold",
+    top: 150,
+    alignItems: "center",
   },
   buttonContainer: {
-    flex: 1, // Entire Screen
-    flexDirection: "column", // Horizantal alignment  (column, column-reverse, row, row-reverse)
-    justifyContent: "center", // Main alignment (flex-start, flex-end, center, stretch, space-between, space-around)
-    alignItems: "center", //Vertical alignment  (flex-start, flex-end, center, stretch, baseline)
+    width: "100%",
+    padding: 20,
+    marginBottom: "20%",
+  },
+  logo: {
+    width: 160,
+    height: 110,
+    // resizeMode: "center",
+  },
+  tagLine: {
+    fontSize: 20,
+    fontWeight: "800",
+    paddingVertical: 20,
+    fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
   },
 });
 
