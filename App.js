@@ -1,7 +1,8 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from "react";
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View } from "react-native";
 
- import WelcomeScreen from "./app/screens/WelcomeScreen"; // Welcome scrren
+import WelcomeScreen from "./app/screens/WelcomeScreen"; // Welcome scrren
 
 import AppText from "./app/components/AppText"; // Standered StyleSheet
 import AppButton from "./app/components/AppButton"; // Standered StyleSheet
@@ -15,11 +16,25 @@ import Icon from "./app/components/Icon";
 import ListItem from "./app/components/ListItem";
 import AccountScreen from "./app/screens/AccountScreen";
 import ListingScreen from "./app/screens/ListingScreen";
+import AppTextInput from "./app/components/AppTextInput";
+import AppPicker from "./app/components/AppPicker";
+import LoginScreen from "./app/screens/LoginScreen";
 
 // import { Ionicons } from "@expo/vector-icons"; // Icon Import
 
+const categories = [
+  { lebel: "Furniture", value: 1 },
+  { lebel: "Clothing", value: 2 },
+  { lebel: "Electronics", value: 3 },
+  { lebel: "Camera", value: 4 },
+];
+
 export default function App() {
-  return <ListingScreen />;
+  const [category, setCategory] = useState(categories[0]);
+  return <LoginScreen />;
+  //      <AppPicker icon="apps" placeholder="Category" />
+  //<AppTextInput icon="email" />;
+  //<ListingScreen />;
   //<AccountScreen />;
   // <MessagesScreen />;
   //<ViewImageScreen />;
@@ -31,6 +46,8 @@ export default function App() {
   //  <AppText>Hi Lord Shiva</AppText>
   //  <WelcomeScreen />;
   //<ListingDetailScreen />;
+
+  //</Screen>
 }
 
 const styles = StyleSheet.create({
@@ -41,5 +58,3 @@ const styles = StyleSheet.create({
     // backgroundColor: '#fff',
   },
 });
-
-

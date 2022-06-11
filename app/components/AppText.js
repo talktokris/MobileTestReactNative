@@ -9,7 +9,7 @@ export default function ({ children, style }) {
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: 30,
+    fontSize: 18,
     fontFamily: Platform.OS === "android" ? fonts.android : fonts.ios,
     //  fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
   },
