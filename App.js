@@ -19,6 +19,7 @@ import ListingScreen from "./app/screens/ListingScreen";
 import AppTextInput from "./app/components/AppTextInput";
 import AppPicker from "./app/components/AppPicker";
 import LoginScreen from "./app/screens/LoginScreen";
+import ListingEditScreen from "./app/screens/ListingEditScreen";
 
 // import { Ionicons } from "@expo/vector-icons"; // Icon Import
 
@@ -31,7 +32,8 @@ const categories = [
 
 export default function App() {
   const [category, setCategory] = useState(categories[0]);
-  return <LoginScreen />;
+  return <ListingEditScreen />;
+  //<LoginScreen />;
   //      <AppPicker icon="apps" placeholder="Category" />
   //<AppTextInput icon="email" />;
   //<ListingScreen />;
