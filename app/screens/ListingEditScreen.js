@@ -9,6 +9,7 @@ import {
   SubmitButton,
 } from "../components/forms";
 import Screen from "../components/Screen";
+import CategoryPickerItem from "../components/CategoryPickerItem";
 
 const validationSchema = Yup.object().shape({
   titile: Yup.string().required().min(1).label("Title"),
@@ -18,10 +19,10 @@ const validationSchema = Yup.object().shape({
 });
 
 const categoriesList = [
-  { lebel: "Furniture", value: 1 },
-  { lebel: "Clothing", value: 2 },
-  { lebel: "Electronics", value: 3 },
-  { lebel: "Camera", value: 4 },
+  { lebel: "Furniture", value: 1, backgroundColor: "red", icon: "apps" },
+  { lebel: "Clothing", value: 2, backgroundColor: "green", icon: "email" },
+  { lebel: "Electronics", value: 3, backgroundColor: "purple", icon: "lock" },
+  { lebel: "Camera", value: 4, backgroundColor: "orange", icon: "apps" },
 ];
 
 function LoginScreen(props) {
@@ -54,7 +55,11 @@ function LoginScreen(props) {
           <AppFormPicker
             items={categoriesList}
             name="category"
+            numberOfColumns={3}
+            PickerItemComponent={CategoryPickerItem}
+            icon="apps"
             placeholder="Category"
+            width="80%"
           />
 
           <AppFormField

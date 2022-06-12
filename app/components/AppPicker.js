@@ -19,16 +19,19 @@ import PickerItem from "./PickerItem";
 function AppPicker({
   icon,
   items,
+  numberOfColumns = 1,
   onSelectItem,
+  PickerItemComponent = PickerItem,
   placeholder,
   selectedItem,
+  width = "100%",
   ...otherProps
 }) {
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <>
       <TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
-        <View style={styles.container}>
+        <View style={[styles.container, { width }]}>
           {icon && (
             <MaterialCommunityIcons
               name={icon}
@@ -43,13 +46,11 @@ function AppPicker({
             <AppText style={styles.placeholder}>{placeholder}</AppText>
           )}
 
-          {icon && (
-            <MaterialCommunityIcons
-              name="chevron-down"
-              size={25}
-              color={colors.medium}
-            />
-          )}
+          <MaterialCommunityIcons
+            name="chevron-down"
+            size={25}
+            color={colors.medium}
+          />
         </View>
       </TouchableWithoutFeedback>
       <Modal visible={modalVisible} animationType="slide">
@@ -58,8 +59,10 @@ function AppPicker({
           <FlatList
             data={items}
             keyExtractor={(item) => item.value.toString()}
+            numColumns={numberOfColumns}
             renderItem={({ item }) => (
-              <PickerItem
+              <PickerItemComponent
+                item={item}
                 lebel={item.lebel}
                 onPress={() => {
                   setModalVisible(false);
@@ -78,8 +81,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.lightGray,
     borderRadius: 25,
-    flexDirection: "row",
     width: "100%",
+    flexDirection: "row",
     padding: 15,
     marginVertical: 10,
   },
@@ -92,7 +95,7 @@ const styles = StyleSheet.create({
     flex: 1,
     color: colors.medium,
   },
-  placeholder: { color: colors.medium },
+  placeholder: { color: colors.medium, flex: 1 },
   icon: {
     marginRight: 10,
   },

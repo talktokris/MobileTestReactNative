@@ -3,8 +3,12 @@ import React from "react";
 
 import fonts from "../config/fonts";
 
-export default function ({ children, style }) {
-  return <Text style={[styles.text, style]}>{children}</Text>;
+export default function ({ children, style, ...otherProps }) {
+  return (
+    <Text style={[styles.text, style]} {...otherProps}>
+      {children}
+    </Text>
+  );
 }
 
 const styles = StyleSheet.create({

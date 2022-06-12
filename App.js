@@ -33,6 +33,7 @@ const categories = [
 export default function App() {
   const [category, setCategory] = useState(categories[0]);
   return <ListingEditScreen />;
+  //<ListingEditScreen />;
   //<LoginScreen />;
   //      <AppPicker icon="apps" placeholder="Category" />
   //<AppTextInput icon="email" />;
