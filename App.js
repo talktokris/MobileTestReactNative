@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Image, Button } from "react-native";
 
 import WelcomeScreen from "./app/screens/WelcomeScreen"; // Welcome scrren
 
@@ -21,18 +21,24 @@ import AppPicker from "./app/components/AppPicker";
 import LoginScreen from "./app/screens/LoginScreen";
 import ListingEditScreen from "./app/screens/ListingEditScreen";
 
+import * as ImagePicker from "expo-image-picker";
+import * as Permissions from "expo-permissions";
+import ImageInput from "./app/components/ImageInput";
+import ImageInputList from "./app/components/ImageInputList";
+
 // import { Ionicons } from "@expo/vector-icons"; // Icon Import
 
-const categories = [
-  { lebel: "Furniture", value: 1 },
-  { lebel: "Clothing", value: 2 },
-  { lebel: "Electronics", value: 3 },
-  { lebel: "Camera", value: 4 },
-];
-
 export default function App() {
-  const [category, setCategory] = useState(categories[0]);
-  return <ListingEditScreen />;
+  return (
+    <Screen>
+      <ListingEditScreen />
+    </Screen>
+  );
+
+  //  <ImageInputList imageUris={imageUris} onAddImage={handleAdd} onRemoveImage={handleRemove} />
+  // <ImageInput imageUri={imageUri}  onChangeImage={(uri) => setImageUri(uri)}/>
+
+  //<ListingEditScreen />;
   //<ListingEditScreen />;
   //<LoginScreen />;
   //      <AppPicker icon="apps" placeholder="Category" />

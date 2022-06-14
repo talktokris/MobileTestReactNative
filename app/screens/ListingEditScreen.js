@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Image, View } from "react-native";
 import * as Yup from "yup";
+import * as Location from "expo-location";
 
 import {
   AppForm,
@@ -10,12 +11,14 @@ import {
 } from "../components/forms";
 import Screen from "../components/Screen";
 import CategoryPickerItem from "../components/CategoryPickerItem";
+import AppFormImagePicker from "../components/forms/AppFormImagePicker";
 
 const validationSchema = Yup.object().shape({
-  titile: Yup.string().required().min(1).label("Title"),
+  title: Yup.string().required().min(1).label("Title"),
   price: Yup.number().required().min(1).max(10000).label("Price"),
   description: Yup.string().label("Description"),
   category: Yup.object().required().nullable().label("Category"),
+  images: Yup.array().min(1, "Please select at least one image"),
 });
 
 const categoriesList = [
@@ -26,6 +29,22 @@ const categoriesList = [
 ];
 
 function LoginScreen(props) {
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        setErrorMsg("Permission to access location was denied");
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+    })();
+  }, []);
+
   return (
     <Screen>
       <View style={styles.container}>
@@ -39,10 +58,14 @@ function LoginScreen(props) {
             price: "",
             description: "",
             category: null,
+            images: [],
           }}
-          onSubmit={(values) => console.log(values)}
+          onSubmit={(values) =>
+            console.log(values + " Location :" + location.coords.latitude)
+          }
           validationSchema={validationSchema}
         >
+          <AppFormImagePicker name="images" />
           <AppFormField name="title" maxLength={255} placeholder="Title" />
 
           <AppFormField
@@ -59,7 +82,7 @@ function LoginScreen(props) {
             PickerItemComponent={CategoryPickerItem}
             icon="apps"
             placeholder="Category"
-            width="80%"
+            /* width="80%" */
           />
 
           <AppFormField
