@@ -5,13 +5,12 @@ import * as Yup from "yup";
 import Screen from "../components/Screen";
 import { AppForm, AppFormField, SubmitButton } from "../components/forms";
 
-
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label("Email"),
   password: Yup.string().required().min(4).label("Password"),
+  confirmPassword: Yup.string().required().min(4).label("Confirm Password"),
 });
-
-function LoginScreen({ navigation }) {
+function RegisterScreen({ navigation }) {
   return (
     <Screen>
       <View style={styles.container}>
@@ -43,13 +42,23 @@ function LoginScreen({ navigation }) {
             textContentType="password"
             secureTextEntry={true}
           />
+          <AppFormField
+            name="confirmPassword"
+            autoCapitalize="none"
+            autoCorrect={false}
+            icon="lock"
+            placeholder="Confirm Password"
+            textContentType="confirmPassword"
+            secureTextEntry={true}
+          />
 
-          <SubmitButton title="Login" />
+          <SubmitButton title="Register" />
         </AppForm>
       </View>
     </Screen>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     padding: 10,
@@ -63,4 +72,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginScreen;
+export default RegisterScreen;

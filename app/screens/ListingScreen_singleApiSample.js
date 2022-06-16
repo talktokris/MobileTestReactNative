@@ -10,30 +10,62 @@ import AppText from "../components/AppText";
 import AppButton from "../components/AppButton";
 import ActivityIndicator from "../components/ActivityIndicator";
 import useApi from "../hooks/useApi";
-
+/*
+const Listings = [
+  {
+    id: 1,
+    title: "Fist Item One",
+    subTitle: "50",
+    image: require("../assets/images/img1.jpg"),
+  },
+  {
+    id: 2,
+    title: "Fist Item Two",
+    subTitle: "230",
+    image: require("../assets/images/img2.jpg"),
+  },
+  {
+    id: 3,
+    title: "Fist Item Three",
+    subTitle: "250",
+    image: require("../assets/images/img3.jpg"),
+  },
+  {
+    id: 4,
+    title: "Fist Item Four",
+    subTitle: "100",
+    image: require("../assets/images/img4.jpg"),
+  },
+];
+*/
 function ListingScreen({ navigation }) {
-  const getListingsAPi = useApi(listingsApi.getListings);
+  const {
+    data: listings,
+    error,
+    loading,
+    request: loadListings,
+  } = useApi(listingsApi.getListings);
 
   useEffect(() => {
-    getListingsAPi.request();
+    loadListings();
   }, []);
 
   return (
     <Screen style={styles.screen}>
-      {getListingsAPi.error && (
+      {error && (
         <>
           <View style={styles.retryView}>
             <AppText style={{ textAlign: "center" }}>
               Couldn't retrieve the listings.
             </AppText>
-            <AppButton title="Retry" onPress={getListingsAPi.request} />
+            <AppButton title="Retry" onPress={loadListings} />
           </View>
         </>
       )}
 
-      <ActivityIndicator visible={getListingsAPi.loading} />
+      <ActivityIndicator visible={loading} />
       <FlatList
-        data={getListingsAPi.data}
+        data={listings}
         keyExtractor={(Listing) => Listing.id.toString()}
         renderItem={({ item }) => (
           <Card

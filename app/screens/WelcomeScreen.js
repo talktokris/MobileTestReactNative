@@ -17,7 +17,10 @@ import AppButton from "../components/AppButton"; // Standered StyleSheet
 import colors from "../config/colors";
 import fonts from "../config/fonts";
 import Constants from "expo-constants";
-function WelcomeScreen(props) {
+
+
+
+function WelcomeScreen({ navigation }) {
   return (
     <ImageBackground
       style={styles.background}
@@ -33,11 +36,11 @@ function WelcomeScreen(props) {
         <Text style={styles.tagLine}>Your Seach End Here</Text>
       </View>
       <View style={styles.buttonContainer}>
-        <AppButton title="Login" onPress={() => console.log("tapped")} />
+        <AppButton title="Login" onPress={() => navigation.navigate("Login")} />
         <AppButton
           title="Register"
           color="secondary"
-          onPress={() => console.log("tapped")}
+          onPress={() => navigation.navigate("Register")}
         />
       </View>
     </ImageBackground>

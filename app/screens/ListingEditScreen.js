@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Image, View } from "react-native";
 import * as Yup from "yup";
-import * as Location from "expo-location";
 
 import {
   AppForm,
@@ -12,6 +11,9 @@ import {
 import Screen from "../components/Screen";
 import CategoryPickerItem from "../components/CategoryPickerItem";
 import AppFormImagePicker from "../components/forms/AppFormImagePicker";
+import useLocation from "../hooks/useLocation";
+import listingsApi from "../api/listings";
+import UploadScreen from "./UploadScreen";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(1).label("Title"),
@@ -28,26 +30,37 @@ const categoriesList = [
   { lebel: "Camera", value: 4, backgroundColor: "orange", icon: "apps" },
 ];
 
-function LoginScreen(props) {
-  const [location, setLocation] = useState(null);
+function ListingEditScreen(props) {
+  const location = useLocation();
+  const [uploadVisible, setUploadVisible] = useState(false);
+  const [progress, setProgress] = useState(0);
   const [errorMsg, setErrorMsg] = useState(null);
 
-  useEffect(() => {
-    (async () => {
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        setErrorMsg("Permission to access location was denied");
-        return;
-      }
+  const handleSubmit = async (listing, { resetForm }) => {
+    //listingsApi.addListing(listing);
+    setProgress(0);
+    setUploadVisible(true);
+    const result = await listingsApi.addListing(
+      { ...listing, location },
+      (progress) => setProgress(progress)
+    );
 
-      let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
-    })();
-  }, []);
+    if (!result.ok) {
+      setUploadVisible(false);
+      return alert("Could not save the listing");
+    }
+    resetForm();
+  };
 
   return (
     <Screen>
       <View style={styles.container}>
+        <UploadScreen
+          onDone={() => setUploadVisible(false)}
+          progress={progress}
+          visible={uploadVisible}
+        />
+
         <Image
           source={require("../assets/images/logo.png")}
           style={styles.image}
@@ -60,9 +73,7 @@ function LoginScreen(props) {
             category: null,
             images: [],
           }}
-          onSubmit={(values) =>
-            console.log(values + " Location :" + location.coords.latitude)
-          }
+          onSubmit={handleSubmit}
           validationSchema={validationSchema}
         >
           <AppFormImagePicker name="images" />
@@ -112,4 +123,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginScreen;
+export default ListingEditScreen;
