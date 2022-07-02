@@ -6,12 +6,13 @@ import colors from "../config/colors";
 
 function ListingDetailScreen({ route }) {
   const listing = route.params;
+
   return (
     <View style={styles.upperContainer}>
-      <Image style={styles.image} source={listing.image} />
+      <Image style={styles.image} source={listing.images} />
       <View style={styles.detailsInfo}>
         <AppText style={styles.title}>{listing.title}</AppText>
-        <AppText style={styles.subTitle}>${listing.subTitle}</AppText>
+        <AppText style={styles.subTitle}>${listing.price}</AppText>
       </View>
       <ListItem
         title="Krishna Jha"

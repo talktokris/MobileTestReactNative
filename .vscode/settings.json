@@ -1,3 +1,4 @@
 {
-    "reactSnippets.settings.typescript": true
+    "reactSnippets.settings.typescript": true,
+    "git.ignoreLimitWarning": true
 }

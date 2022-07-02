@@ -1,15 +1,7 @@
 import React from "react";
 
 //import { ImageBackground, StyleSheet,View } from "react-native";
-import {
-  useState,
-  Component,
-  ImageBackground,
-  StyleSheet,
-  View,
-  Image,
-  Text,
-} from "react-native";
+import { ImageBackground, StyleSheet, View, Image, Text } from "react-native";
 
 //import React, {useState, Component, ImageBackground} from 'react';
 import AppText from "../components/AppText"; // Standered StyleSheet
@@ -17,8 +9,6 @@ import AppButton from "../components/AppButton"; // Standered StyleSheet
 import colors from "../config/colors";
 import fonts from "../config/fonts";
 import Constants from "expo-constants";
-
-
 
 function WelcomeScreen({ navigation }) {
   return (
@@ -73,7 +63,6 @@ const styles = StyleSheet.create({
     fontWeight: "800",
     paddingVertical: 20,
     fontFamily: Platform.OS === "android" ? fonts.android : fonts.ios,
-    alignItems: "",
   },
 });
 
